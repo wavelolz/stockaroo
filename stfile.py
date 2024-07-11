@@ -23,8 +23,19 @@ from user_behavior_tracker import save_user_session, save_tab_click_counter
 st.set_page_config(layout="wide")
 pio.templates.default = "plotly_dark"
 
-DIR_PATH = os.path.dirname(os.path.realpath(__file__))
-KEY_PATH = os.path.join(DIR_PATH, "secret_info/stockaroo-privatekey.json")
+KEY_PATH = {
+    "type": st.secrets["firebase"]["type"],
+    "project_id": st.secrets["firebase"]["project_id"],
+    "private_key_id": st.secrets["firebase"]["private_key_id"],
+    "private_key": st.secrets["firebase"]["private_key"],
+    "client_email": st.secrets["firebase"]["client_email"],
+    "client_id": st.secrets["firebase"]["client_id"],
+    "auth_uri": st.secrets["firebase"]["auth_uri"],
+    "token_uri": st.secrets["firebase"]["token_uri"],
+    "auth_provider_x509_cert_url": st.secrets["firebase"]["auth_provider_x509_cert_url"],
+    "client_x509_cert_url": st.secrets["firebase"]["client_x509_cert_url"],
+    "universe_domain": st.secrets["firebase"]["universe_domain"]
+}
 
 
 # initialize the structure
