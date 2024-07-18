@@ -160,6 +160,9 @@ msgstr "Biotechnology and Medical Care"
 msgid "Building Materials and Construction"
 msgstr "Building Materials and Construction"
 
+msgid "Telecommunication and Network Industry"
+msgstr "Telecommunication and Network Industry"
+
 msgid "Rubber Industry"
 msgstr "Rubber Industry"
 
@@ -261,6 +264,12 @@ msgstr "Please select an industry"
 
 msgid "Number of stocks"
 msgstr "Number of stocks"
+
+msgid "The following shows the stocks selected"
+msgstr "The following shows the stocks selected"
+
+msgid "This table shows the ROI of each stock"
+msgstr "This table shows the ROI of each stock"
 
 msgid "Start"
 msgstr "Start"

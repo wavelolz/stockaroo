@@ -13,7 +13,7 @@ msgstr "隨機選股計畫"
 msgid "Stock Market Journal"
 msgstr "股市日誌"
 
-msgid "testing123"
+msgid "Patience is the Key"
 msgstr "耐心是一切的關鍵"
 
 msgid "Surprise from Randomness"
@@ -136,6 +136,15 @@ msgstr "本模擬將會從選擇的產業類別中隨機抽取標的"
 msgid "All"
 msgstr "全部"
 
+msgid "Finance and Insurance"
+msgstr "金融保險"
+
+msgid "Electrical Machinery"
+msgstr "電機機械"
+
+msgid "Electronics Industry"
+msgstr "電子工業"
+
 msgid "Semiconductor Industry"
 msgstr "半導體業"
 
@@ -208,7 +217,7 @@ msgstr "文化創意業"
 msgid "Tourism Industry"
 msgstr "觀光事業"
 
-msgid "Telecommunications and Networking Industry"
+msgid "Telecommunication and Network Industry"
 msgstr "通信網路業"
 
 msgid "Others"
@@ -256,6 +265,11 @@ msgstr "塑膠工業"
 msgid "ETF"
 msgstr "ETF"
 
+msgid "The following shows the stocks selected"
+msgstr "以下呈現各段期間所選取的股票"
+
+msgid "This table shows the ROI of each stock"
+msgstr "以下表格呈現每檔股票的報酬率"
 
 msgid "Please select an industry"
 msgstr "請選擇一個產業"
