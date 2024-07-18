@@ -40,6 +40,7 @@ KEY_PATH = {
     "universe_domain": st.secrets["firebase"]["universe_domain"]
 }
 
+
 # initialize the structure
 if 'user_id' not in st.session_state:
     st.session_state['user_id'] = str(uuid.uuid4())
@@ -75,7 +76,6 @@ CSS = """
 </style>
 """
 
-
 def create_excel(df):
     dfc = df.copy()
     dfc.columns = ["date", "min", "max", "open", "close"]
@@ -85,6 +85,7 @@ def create_excel(df):
         dfc.to_excel(writer, sheet_name='Sheet1', index=False)
     buffer.seek(0)
     return buffer
+
 
 def filter_date(data, code):
     """
@@ -195,7 +196,7 @@ st.sidebar.image(image, width=150)
 
 st.sidebar.markdown("<hr style='margin-top: 0px; margin-bottom: 0px;'>", unsafe_allow_html=True)
 # Define the available languages
-languages = { '繁體中文': 'zh_TW', 'English': 'en'}
+languages = {'English': 'en', '繁體中文': 'zh_TW'}
 
 # Create a selectbox for language selection
 selected_language = st.sidebar.selectbox('Select Language', options=list(languages.keys()))
@@ -267,17 +268,9 @@ if chosen_id == "1":
     # Filter data based on the selected duration
     filter_code = duration_map[selected_duration]
     filtered_data = filter_date(cleaned_data, filter_code)
-
-    excel_file = create_excel(filtered_data)
-
-    st.markdown("<hr style='margin-top: 0px; margin-bottom: 0px;'>", unsafe_allow_html=True)
-    st.download_button(
-        label=_t("Download Data"),
-        data=excel_file,
-        file_name=f"{selected_stock[1:]}_{selected_duration}.xlsx",
-        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    )
-
+    
+    st.markdown("<hr style='margin-top: 0px; margin-bottom: 0px;'>", unsafe_allow_html=True) 
+    
     # Create the line plot
     line_plot = go.Scatter(
         x=filtered_data["date"],
@@ -333,6 +326,17 @@ if chosen_id == "1":
 
     # Display the plot
     st.plotly_chart(fig, use_container_width=True)
+
+    # Create the Excel file
+    excel_file = create_excel(filtered_data)
+
+    # Create a download button
+    st.download_button(
+        label=_t("Download Data"),
+        data=excel_file,
+        file_name=f"{selected_stock[1:]}_{selected_duration}_data.xlsx",
+        mime="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    )
 
 if chosen_id == "2":
 
