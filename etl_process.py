@@ -1,13 +1,11 @@
 from datetime import datetime, timedelta
 import streamlit as st
 import pandas as pd
-from google.oauth2 import service_account
 from google.cloud import firestore
 
 @st.cache_data
 def FetchDatasetList(key_path):
-    credentials = service_account.Credentials.from_service_account_info(key_path)
-    db = firestore.Client(credentials=credentials)
+    db = firestore.Client.from_service_account_json(key_path)
     doc_ref = db.collection("info").document("info_data")
     doc = doc_ref.get()
     data = doc.to_dict()
@@ -18,8 +16,7 @@ def FetchDatasetList(key_path):
 
 @st.cache_data
 def FetchData(collection_name, stock_id, key_path):
-    credentials = service_account.Credentials.from_service_account_info(key_path)
-    db = firestore.Client(credentials=credentials)
+    db = firestore.Client.from_service_account_json(key_path)
     doc_ref = db.collection(collection_name).document(stock_id)
     doc = doc_ref.get()
     data = doc.to_dict()
@@ -31,8 +28,7 @@ def FetchData(collection_name, stock_id, key_path):
 
 @st.cache_data
 def FetchChineseName(key_path):
-    credentials = service_account.Credentials.from_service_account_info(key_path)
-    db = firestore.Client(credentials=credentials)
+    db = firestore.Client.from_service_account_json(key_path)
     doc_ref = db.collection("info").document("info_data")
     doc = doc_ref.get()
     data = doc.to_dict()
@@ -40,13 +36,12 @@ def FetchChineseName(key_path):
     df = pd.DataFrame.from_dict(data, orient="index")
     df.reset_index(inplace=True)
     df.rename(columns={"index" : "id"}, inplace=True)
-    l = [df.iloc[i]["id"][1:].upper()+"-"+df.iloc[i]["n"] for i in range(len(df))]
-    return l
+    df["id"] = df["id"].map(lambda x: str(x).upper()[1:])
+    return df
 
 @st.cache_data
 def FetchDateMargin(key_path):
-    credentials = service_account.Credentials.from_service_account_info(key_path)
-    db = firestore.Client(credentials=credentials)
+    db = firestore.Client.from_service_account_json(key_path)
     doc_ref = db.collection("date_margin").document("date_margin_data")
     doc = doc_ref.get()
     data = doc.to_dict()
@@ -57,7 +52,7 @@ def FetchDateMargin(key_path):
 
 @st.cache_data
 def CleanData(data):
-    filter_data = data.loc[data["close"] != 0]
+    filter_data = data.loc[data["c"] != 0]
     return filter_data
 
 @st.cache_data
