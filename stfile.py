@@ -196,7 +196,7 @@ st.sidebar.image(image, width=150)
 
 st.sidebar.markdown("<hr style='margin-top: 0px; margin-bottom: 0px;'>", unsafe_allow_html=True)
 # Define the available languages
-languages = {'English': 'en', '繁體中文': 'zh_TW'}
+languages = { '繁體中文': 'zh_TW', 'English': 'en'}
 
 # Create a selectbox for language selection
 selected_language = st.sidebar.selectbox('Select Language', options=list(languages.keys()))
