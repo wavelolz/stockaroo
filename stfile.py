@@ -14,6 +14,7 @@ import extra_streamlit_components as stx
 import uuid
 from PIL import Image
 import io
+from dotenv import load_dotenv
 
 
 # Custom module imports
@@ -22,23 +23,56 @@ from random_stock_select import MonkeySelectStock
 from regular_investment_plan import FilterMonths, FilterQuarters, CalculateInvestmentReturns, FormatChange, FormatRatio, FormatNumber
 from user_behavior_tracker import save_user_session, save_tab_click_counter
 
+if os.path.exists(".env"):
+    load_dotenv()
+    ENVIROMENT = os.getenv("ENVIRONMENT")
+else:
+    ENVIROMENT = st.secrets["firebase"]["environment"]
+
+
+if ENVIROMENT == "local":
+    TYPE = os.getenv("TYPE")
+    PROJECT_ID = os.getenv("PROJECT_ID")
+    PRIVATE_KEY_ID = os.getenv("PRIVATE_KEY_ID")
+    PRIVATE_KEY = os.getenv("PRIVATE_KEY")
+    CLIENT_EMAIL = os.getenv("CLIENT_EMAIL")
+    CLIENT_ID = os.getenv("CLIENT_ID")
+    AUTH_URI = os.getenv("AUTH_URI")
+    TOKEN_URI = os.getenv("TOKEN_URI")
+    AUTH_PROVIDER_X509_CERT_URL = os.getenv("AUTH_PROVIDER_X509_CERT_URL")
+    UNIVERSE_DOMAIN = os.getenv("UNIVERSE_DOMAIN")
+    KEY_PATH = {
+        "type": TYPE,
+        "project_id": PROJECT_ID,
+        "private_key_id": PRIVATE_KEY_ID,
+        "private_key": PRIVATE_KEY,
+        "client_email": CLIENT_EMAIL,
+        "client_id": CLIENT_ID,
+        "auth_uri": AUTH_URI,
+        "token_uri": TOKEN_URI,
+        "auth_provider_x509_cert_url": AUTH_PROVIDER_X509_CERT_URL,
+        "universe_domain": UNIVERSE_DOMAIN,
+
+    }
+else:
+    KEY_PATH = {
+        "type": st.secrets["firebase"]["type"],
+        "project_id": st.secrets["firebase"]["project_id"],
+        "private_key_id": st.secrets["firebase"]["private_key_id"],
+        "private_key": st.secrets["firebase"]["private_key"],
+        "client_email": st.secrets["firebase"]["client_email"],
+        "client_id": st.secrets["firebase"]["client_id"],
+        "auth_uri": st.secrets["firebase"]["auth_uri"],
+        "token_uri": st.secrets["firebase"]["token_uri"],
+        "auth_provider_x509_cert_url": st.secrets["firebase"]["auth_provider_x509_cert_url"],
+        "client_x509_cert_url": st.secrets["firebase"]["client_x509_cert_url"],
+        "universe_domain": st.secrets["firebase"]["universe_domain"]
+    }
 
 st.set_page_config(layout="wide")
 pio.templates.default = "plotly_dark"
 
-KEY_PATH = {
-    "type": st.secrets["firebase"]["type"],
-    "project_id": st.secrets["firebase"]["project_id"],
-    "private_key_id": st.secrets["firebase"]["private_key_id"],
-    "private_key": st.secrets["firebase"]["private_key"],
-    "client_email": st.secrets["firebase"]["client_email"],
-    "client_id": st.secrets["firebase"]["client_id"],
-    "auth_uri": st.secrets["firebase"]["auth_uri"],
-    "token_uri": st.secrets["firebase"]["token_uri"],
-    "auth_provider_x509_cert_url": st.secrets["firebase"]["auth_provider_x509_cert_url"],
-    "client_x509_cert_url": st.secrets["firebase"]["client_x509_cert_url"],
-    "universe_domain": st.secrets["firebase"]["universe_domain"]
-}
+
 
 
 # initialize the structure
@@ -196,7 +230,7 @@ st.sidebar.image(image, width=150)
 
 st.sidebar.markdown("<hr style='margin-top: 0px; margin-bottom: 0px;'>", unsafe_allow_html=True)
 # Define the available languages
-languages = { '繁體中文': 'zh_TW', 'English': 'en'}
+languages = {'English': 'en', '繁體中文': 'zh_TW'}
 
 # Create a selectbox for language selection
 selected_language = st.sidebar.selectbox('Select Language', options=list(languages.keys()))

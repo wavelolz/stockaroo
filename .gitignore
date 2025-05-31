@@ -1,5 +1,12 @@
 __pycache__/
+secret_info/
+.streamlit/
+.vscode/
 *.json
+*.xlsx
 test.py
 parallel_task.py
-secret_info/
+etl_development.py
+.venvstockaroo
+*.env
+*.txt
