@@ -6,4 +6,4 @@ polib
 extra-streamlit-components
 google-cloud-firestore
 google-auth
-openpyxl
+dotenv  
