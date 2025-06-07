@@ -27,7 +27,7 @@ jobs:
           # pip install -r requirements.txt  # Uncomment if your script needs packages
       - name: Run Testing Script
         env:
-            TOKEN: $ {{ secrets.TOKEN }}
+            TOKEN: ${{ secrets.TOKEN }}
         run: |
           python "Data Stream/action-test.py"
     #   - name: Run auto-update.py
