@@ -24,12 +24,15 @@ jobs:
       - name: Install dependencies (if needed)
         run: |
           python -m pip install --upgrade pip
-          # pip install -r requirements.txt  # Uncomment if your script needs packages
+          pip install -r requirements.txt 
       - name: Run Testing Script
         env:
             TOKEN: ${{ secrets.TOKEN }}
+            PWD: ${{ secrets.PWD }}
+            USER_ID: ${{ secrets.USER_ID }}
+            FIRESTORE_CREDENTIALS: echo '${{ secrets.FIRESTORE_CREDENTIALS }}' > 'firestore-credential.json' 
         run: |
-          python "Data Stream/action-test.py"
+          python "Data Stream/auto_update.py"
     #   - name: Run auto-update.py
     #     run: |
     #       python auto-update.py

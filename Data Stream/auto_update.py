@@ -129,14 +129,14 @@ def update_stock_data(stock_id, stock_data, db):
 
 def main():
     # Initialize Firestore
-    key_path = r".\firestore-credential.json"
+    key_path = r"firestore-credential.json"
     with open(key_path, "r") as f:
         info = json.load(f)
     credentials = service_account.Credentials.from_service_account_info(info)
     db = firestore.Client(credentials=credentials)
 
     # End Date
-    end_date = "2025-02-20"
+    end_date = "2025-03-01"
 
     # Initialize fetchers
     date_fetcher = DateFetcher(db)

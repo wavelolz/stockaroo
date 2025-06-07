@@ -10,3 +10,4 @@ etl_development.py
 .venvstockaroo
 *.env
 *.txt
+!selected_stock.json
