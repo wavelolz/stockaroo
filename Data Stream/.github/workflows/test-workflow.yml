@@ -1,6 +1,9 @@
 name: Simple Workflow
 
-on: push
+on:
+    push:
+        branches:
+            - "feature/auto-update"
 
 jobs:
     first-job:
