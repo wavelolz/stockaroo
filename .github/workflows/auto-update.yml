@@ -27,7 +27,7 @@ jobs:
           # pip install -r requirements.txt  # Uncomment if your script needs packages
       - name: Run Testing Script
         run: |
-          python action-test.py
+          python "Data Stream/action-test.py"
     #   - name: Run auto-update.py
     #     run: |
     #       python auto-update.py
