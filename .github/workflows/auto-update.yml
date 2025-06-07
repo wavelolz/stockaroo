@@ -1,9 +1,11 @@
 name: Auto Update Stock Data
 
 on:
-  push:
-    branches:
-      - feature/auto-update  # Add any branch you want it to run on
+    schedule:
+        - cron: '0 1 * * *'
+#   push:
+#     branches:
+#       - feature/auto-update  # Add any branch you want it to run on
 #   workflow_dispatch:       # Allows manual trigger from the GitHub UI
 #   schedule:
 #     - cron: '0 0 */3 * *'  # Runs every 3 days at 00:00 UTC
