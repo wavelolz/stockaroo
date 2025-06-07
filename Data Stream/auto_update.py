@@ -102,7 +102,7 @@ class DateFetcher:
 def load_selected_stocks():
     """Load selected stocks from JSON file"""
     try:
-        with open("selected_stock.json", "r") as f:
+        with open("Data Stream/selected_stock.json", "r") as f:
             return json.load(f)
     except Exception as e:
         print(f"Error loading selected stocks: {str(e)}")
