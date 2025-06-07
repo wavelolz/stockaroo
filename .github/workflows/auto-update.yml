@@ -32,9 +32,4 @@ jobs:
             USER_ID: ${{ secrets.USER_ID }}
         run: |
             echo '${{ secrets.FIRESTORE_CREDENTIALS }}' > 'firestore-credential.json'
-            ls
-    #     run: |
-    #       python "Data Stream/auto_update.py"
-    #   - name: Run auto-update.py
-    #     run: |
-    #       python auto-update.py
+            python "Data Stream/auto_update.py"
