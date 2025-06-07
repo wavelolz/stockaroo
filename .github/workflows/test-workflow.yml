@@ -1,0 +1,13 @@
+name: Simple Workflow
+
+on:
+    push:
+        branches:
+            - "feature/auto-update"
+
+jobs:
+    first-job:
+        runs-on: ubuntu-latest
+        steps:
+            - name: Greeting
+              run: echo "hello github action"
