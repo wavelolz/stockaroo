@@ -3,6 +3,7 @@ name: Auto Update Stock Data
 on:
     schedule:
         - cron: '0 1 * * *'
+    workflow_dispatch:
 #   push:
 #     branches:
 #       - feature/auto-update  # Add any branch you want it to run on
