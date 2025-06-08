@@ -136,7 +136,7 @@ def main():
     db = firestore.Client(credentials=credentials)
 
     # End Date
-    end_date = "2025-04-01"
+    end_date = "2025-03-10"
 
     # Initialize fetchers
     date_fetcher = DateFetcher(db)
