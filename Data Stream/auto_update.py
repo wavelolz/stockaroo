@@ -6,7 +6,7 @@ import json
 from google.cloud import firestore
 from google.oauth2 import service_account
 import time
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 load_dotenv()
 TOKEN = os.getenv("TOKEN")
@@ -136,7 +136,8 @@ def main():
     db = firestore.Client(credentials=credentials)
 
     # End Date
-    end_date = "2025-03-10"
+    end_date = date.today()
+    end_date = end_date.strftime("%Y-%m-%d")
 
     # Initialize fetchers
     date_fetcher = DateFetcher(db)
