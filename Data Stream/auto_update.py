@@ -138,6 +138,7 @@ def main():
     # End Date
     end_date = date.today()
     end_date = end_date.strftime("%Y-%m-%d")
+    print(end_date)
 
     # Initialize fetchers
     date_fetcher = DateFetcher(db)
