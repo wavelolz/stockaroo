@@ -49,7 +49,7 @@ jobs:
           git config user.name "wavelolz"
           git config user.email "rayhsu005@gmail.com"
           
-          git add status.txt
+          git add "Data Stream/status.txt"
           git commit -m "Update status.txt from GitHub Actions"
           git push origin feature/auto-update
 
