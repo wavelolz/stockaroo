@@ -158,7 +158,7 @@ def main():
         status = int(f.readline())
 
     stock_list = load_selected_stocks(status)
-    stock_list = stock_list[:10]
+    stock_list = stock_list
 
     status = 2 if status == 1 else 1
 
@@ -178,8 +178,8 @@ def main():
         # print(current_end_date)
         current_end_date_obj = datetime.strptime(current_end_date, "%Y-%m-%d")
 
-        # Subtract 3 days
-        start_date_obj = current_end_date_obj - timedelta(days=14)
+        # Subtract 5 days
+        start_date_obj = current_end_date_obj - timedelta(days=5)
 
         # Convert back to string
         start_date = start_date_obj.strftime("%Y-%m-%d")
@@ -192,7 +192,7 @@ def main():
             update_stock_data(stock, df, db)
             
             # Wait between API calls
-            time.sleep(2)
+            time.sleep(10)
         else:
             print(f"Failed to fetch data for stock {stock}")
 
