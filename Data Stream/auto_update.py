@@ -104,10 +104,10 @@ def load_selected_stocks(status: int):
     """Load selected stocks from JSON file"""
     try:
         if status == 1:
-            with open("stock_list_1.json", "r") as f:
+            with open("Data Stream/stock_list_1.json", "r") as f:
                 return json.load(f)
         else:
-            with open("stock_list_2.json", "r") as f:
+            with open("Data Stream/stock_list_2.json", "r") as f:
                 return json.load(f)
     except Exception as e:
         print(f"Error loading selected stocks: {str(e)}")
@@ -154,7 +154,7 @@ def main():
         print("No date range data found")
         return
     
-    with open("status.txt") as f:
+    with open("Data Stream/status.txt") as f:
         status = int(f.readline())
 
     stock_list = load_selected_stocks(status)
@@ -162,7 +162,7 @@ def main():
 
     status = 2 if status == 1 else 1
 
-    with open("status.txt", "w") as f:
+    with open("Data Stream/status.txt", "w") as f:
         f.write(str(status))
 
     # Update date
