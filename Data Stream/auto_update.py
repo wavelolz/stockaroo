@@ -158,7 +158,6 @@ def main():
         status = int(f.readline())
 
     stock_list = load_selected_stocks(status)
-    stock_list = stock_list
 
     status = 2 if status == 1 else 1
 
