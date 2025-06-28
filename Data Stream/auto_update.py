@@ -127,7 +127,7 @@ def update_stock_data(stock_id, stock_data, db):
             }
         
         # Upload to Firestore
-        db.collection("test_stock").document(stock_id).set(stock_dict, merge=True)
+        db.collection("stock").document(stock_id).set(stock_dict, merge=True)
         print(f"Successfully updated data for stock {stock_id}")
     except Exception as e:
         print(f"Error updating stock data for {stock_id}: {str(e)}")
@@ -178,7 +178,7 @@ def main():
         current_end_date_obj = datetime.strptime(current_end_date, "%Y-%m-%d")
 
         # Subtract 5 days
-        start_date_obj = current_end_date_obj - timedelta(days=5)
+        start_date_obj = current_end_date_obj - timedelta(days=500)
 
         # Convert back to string
         start_date = start_date_obj.strftime("%Y-%m-%d")
