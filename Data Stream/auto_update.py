@@ -165,7 +165,7 @@ def main():
         f.write(str(status))
 
     # Update date
-    # date_fetcher.update_date_data(stock_list, end_date)
+    date_fetcher.update_date_data(stock_list, end_date)
 
     # Process each stock
     for stock in stock_list:
