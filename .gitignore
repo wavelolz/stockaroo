@@ -11,3 +11,6 @@ etl_development.py
 *.env
 *.txt
 !selected_stock.json
+!stock_list_1.json
+!stock_list_2.json
+!status.txt

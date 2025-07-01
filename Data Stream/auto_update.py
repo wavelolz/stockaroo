@@ -92,18 +92,23 @@ class DateFetcher:
         """Update data in Firestore collection 'date_margin' and document 'date_margin_data'"""
         try:
             for i in range(len(selected_stock)):
-                self.date_margin[selected_stock[i]]["e"] = end_date
+                if self.date_margin[selected_stock[i]]["e"] >= "2025-05-01": # ensure stock that is already out of market is not updated
+                    self.date_margin[selected_stock[i]]["e"] = end_date
             doc_ref = self.db.collection(self.collection_name).document(self.document_name)
             doc_ref.set(self.date_margin, merge=True)
             print("Data successfully updated in Firestore")
         except Exception as e:
             print(f"Error updating data in Firestore: {str(e)}")
 
-def load_selected_stocks():
+def load_selected_stocks(status: int):
     """Load selected stocks from JSON file"""
     try:
-        with open("Data Stream/selected_stock.json", "r") as f:
-            return json.load(f)
+        if status == 1:
+            with open("Data Stream/stock_list_1.json", "r") as f:
+                return json.load(f)
+        else:
+            with open("Data Stream/stock_list_2.json", "r") as f:
+                return json.load(f)
     except Exception as e:
         print(f"Error loading selected stocks: {str(e)}")
         return {}
@@ -122,7 +127,7 @@ def update_stock_data(stock_id, stock_data, db):
             }
         
         # Upload to Firestore
-        db.collection("test_stock").document(stock_id).set(stock_dict, merge=True)
+        db.collection("stock").document(stock_id).set(stock_dict, merge=True)
         print(f"Successfully updated data for stock {stock_id}")
     except Exception as e:
         print(f"Error updating stock data for {stock_id}: {str(e)}")
@@ -138,29 +143,32 @@ def main():
     # End Date
     end_date = date.today()
     end_date = end_date.strftime("%Y-%m-%d")
-    print(end_date)
 
     # Initialize fetchers
     date_fetcher = DateFetcher(db)
     stock_fetcher = StockDataFetcher(TOKEN)
-
-    # Load selected stocks
-    selected_stocks = load_selected_stocks()
-    if not selected_stocks:
-        print("No selected stocks found")
-        return
 
     # Get current date range from Firestore
     date_range = date_fetcher.fetch_date_data()
     if not date_range:
         print("No date range data found")
         return
+    
+    with open("Data Stream/status.txt") as f:
+        status = int(f.readline())
+
+    stock_list = load_selected_stocks(status)
+
+    status = 2 if status == 1 else 1
+
+    with open("Data Stream/status.txt", "w") as f:
+        f.write(str(status))
 
     # Update date
-    date_fetcher.update_date_data(selected_stocks, end_date)
+    date_fetcher.update_date_data(stock_list, end_date)
 
     # Process each stock
-    for stock in selected_stocks:
+    for stock in stock_list:
         print(f"\nProcessing stock: {stock}")
         
         # Get current end date for the stock
@@ -169,8 +177,8 @@ def main():
         # print(current_end_date)
         current_end_date_obj = datetime.strptime(current_end_date, "%Y-%m-%d")
 
-        # Subtract 3 days
-        start_date_obj = current_end_date_obj - timedelta(days=14)
+        # Subtract 5 days
+        start_date_obj = current_end_date_obj - timedelta(days=500)
 
         # Convert back to string
         start_date = start_date_obj.strftime("%Y-%m-%d")
@@ -183,7 +191,7 @@ def main():
             update_stock_data(stock, df, db)
             
             # Wait between API calls
-            time.sleep(2)
+            time.sleep(10)
         else:
             print(f"Failed to fetch data for stock {stock}")
 
