@@ -7,8 +7,13 @@ Stockaroo is an interactive app developed by me and [OuOLeaf](https://github.com
 
 # Release History
 - [0.1.0 / 2024-07-20](#0.1.0)
+- [1.1.0 / 2024-06-30](#1.1.0)
 	
 # Release Detail
 
 ## 0.1.0
 🎉Let's celebrate the launch of Stockaroo !!!
+
+## 1.1.0
+NEW UPDATE!!!
+Now the stock data will update daily!!
