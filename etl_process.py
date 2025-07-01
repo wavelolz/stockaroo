@@ -15,7 +15,8 @@ def FetchDatasetList(key_path):
     df.reset_index(inplace=True)
     df.rename(columns={"index" : "id"}, inplace=True)
     return df
-
+    
+@st.cache_data
 def FetchData(collection_name, stock_id, key_path):
     credentials = service_account.Credentials.from_service_account_info(key_path)
     db = firestore.Client(credentials=credentials)
