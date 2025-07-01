@@ -1,0 +1,32 @@
+name: Testing Date Update
+
+on:
+    workflow_dispatch:
+    schedule:
+        - cron: '30 6 * * *'
+    
+#   push:
+#     branches:
+#       - feature/auto-update  # Add any branch you want it to run on
+#   workflow_dispatch:       # Allows manual trigger from the GitHub UI
+#   schedule:
+#     - cron: '0 0 */3 * *'  # Runs every 3 days at 00:00 UTC
+
+jobs:
+  run-auto-update:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          ref: feature/auto-update
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Run Testing Script
+        run: |
+            python "Data Stream/action-test.py"

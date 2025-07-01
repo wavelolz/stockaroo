@@ -7,3 +7,4 @@ extra-streamlit-components
 google-cloud-firestore
 google-auth
 dotenv  
+openpyxl
